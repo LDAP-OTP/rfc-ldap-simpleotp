@@ -63,10 +63,12 @@ The 'Bind operation' [(RFC 4511, Section 4.2)](https://www.rfc-editor.org/info/r
 
 The 'Bind request' is defined as follows:
 
+```
   BindRequest ::= [APPLICATION 0] SEQUENCE {
     version                 INTEGER (1 ..  127),
     name                    LDAPDN,
     authentication          AuthenticationChoice }
+```
 
 # Simple Authentication Method with OTP
 
@@ -75,6 +77,7 @@ server a password and a one-time password (OTP).
 
 The Authentication scope is defined as:
 
+```
   AuthenticationChoice ::= CHOICE {
     simple                  [0] OCTET STRING,
                             -- 1 and 2 reserved
@@ -85,6 +88,7 @@ The Authentication scope is defined as:
   SimpleOtp ::= SEQUENCE {
     password                OCTET STRING,
     onetimepassword         OCTET STRING }
+```
 
 Text based passwords and one-time password transferred to the server using the 'simpleotp' 'AuthenticationChoice' SHALL
 be transferred as UTF-8 [RFC3629](https://www.rfc-editor.org/info/rfc3629/) encoded Unicode.
