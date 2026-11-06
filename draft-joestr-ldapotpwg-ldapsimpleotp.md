@@ -9,20 +9,20 @@ number:
 date:
 consensus: false
 v: 3
-area: AREA
-workgroup: LDAP OTP Working Group
+# area: AREA
+# workgroup: LDAP OTP Working Group
 keyword:
  - LDAP
  - Simple Authentication
  - One-Time Password
  - OTP
 venue:
-  group: LDAP OTP
-  type: Working Group
-  mail: mb.ldap-otp@joestr.priv.at
-  arch: https://github.com/LDAP-OTP
-  github: LDAP-OTP/rfc-ldap-simpleotp
-  latest: https://ldap-otp.github.io/rfc-ldap-simpleotp
+#  group: LDAP OTP
+#  type: Working Group
+#  mail: mb.ldap-otp@joestr.priv.at
+#  arch: https://github.com/LDAP-OTP
+  github: "LDAP-OTP/rfc-ldap-simpleotp"
+  latest: "https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-ldapotpwg-ldapsimpleotp.html"
 
 author:
  -
