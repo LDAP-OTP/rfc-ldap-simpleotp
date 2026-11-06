@@ -19,35 +19,36 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Lightweight Directory Access Protocol: Simple Authentication with OTP"
+abbrev: "LDAP: Simple OTP"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+docname: draft-joestr-ldapotpwg-ldapsimpleotp-latest
+submissiontype: independent  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
 v: 3
 area: AREA
-workgroup: WG Working Group
+workgroup: LDAP OTP Working Group
 keyword:
- - next generation
- - unicorn
- - AI-native
+ - LDAP
+ - Simple Authentication
+ - One-Time Password
+ - OTP
 venue:
-  group: WG
+  group: LDAP OTP
   type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  mail: mb.ldap-otp@joestr.priv.at
+  arch: https://github.com/LDAP-OTP
+  github: LDAP-OTP/rfc-ldap-simpleotp
+  latest: https://ldap-otp.github.io/rfc-ldap-simpleotp
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: Joel Strasser
+    organization: n/a
+    email: strasser999@gmail.com
 
 normative:
 
