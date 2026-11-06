@@ -2,14 +2,14 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
+LDAP OTP Working Group                                       J. Strasser
+Internet-Draft                                                       n/a
 Intended status: Informational                           6 November 2026
 Expires: 10 May 2027
 
 
-                           TODO - Your title
-                  draft-todo-yourname-protocol-latest
+ Lightweight Directory Access Protocol: Simple Authentication with OTP
+              draft-joestr-ldapotpwg-ldapsimpleotp-latest
 
 Abstract
 
@@ -19,17 +19,17 @@ About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   The latest revision of this draft can be found at https://ldap-
+   otp.github.io/rfc-ldap-simpleotp.  Status information for this
+   document may be found at https://datatracker.ietf.org/doc/draft-
+   joestr-ldapotpwg-ldapsimpleotp/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   Discussion of this document takes place on the LDAP OTP Working Group
+   mailing list (mailto:mb.ldap-otp@joestr.priv.at), which is archived
+   at https://github.com/LDAP-OTP.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/LDAP-OTP/rfc-ldap-simpleotp.
 
 Status of This Memo
 
@@ -57,10 +57,7 @@ Copyright Notice
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
-   and restrictions with respect to this document.  Code Components
-   extracted from this document must include Revised BSD License text as
-   described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Revised BSD License.
+   and restrictions with respect to this document.
 
 Table of Contents
 
@@ -109,6 +106,6 @@ Acknowledgments
 
 Author's Address
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Joel Strasser
+   n/a
+   Email: strasser999@gmail.com
