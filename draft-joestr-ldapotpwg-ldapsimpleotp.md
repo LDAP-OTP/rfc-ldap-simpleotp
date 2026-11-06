@@ -27,7 +27,7 @@ docname: draft-joestr-ldapotpwg-ldapsimpleotp-latest
 submissiontype: independent  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
-consensus: true
+consensus: false
 v: 3
 area: AREA
 workgroup: LDAP OTP Working Group
