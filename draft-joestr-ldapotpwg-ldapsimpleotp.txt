@@ -104,11 +104,12 @@ Table of Contents
 
    The Authentication scope is defined as:
 
-   AuthenticationChoice ::= CHOICE { simple [0] OCTET STRING, -- 1 and 2
-   reserved sasl [3] SaslCredentials, simpleotp [4] SimpleOtp, ...  }
+   ``` AuthenticationChoice ::= CHOICE { simple [0] OCTET STRING, -- 1
+   and 2 reserved sasl [3] SaslCredentials, simpleotp [4] SimpleOtp, ...
+   }
 
    SimpleOtp ::= SEQUENCE { password OCTET STRING, onetimepassword OCTET
-   STRING }
+   STRING } ```
 
    Text based passwords and one-time password transferred to the server
    using the 'simpleotp' 'AuthenticationChoice' SHALL be transferred as
