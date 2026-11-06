@@ -63,9 +63,9 @@ The 'Bind operation' [(RFC 4511, Section 4.2)](https://www.rfc-editor.org/info/r
 
 The 'Bind request' is defined as follows:
 
-  BindRequest ::= [APPLICATION 0] SEQUENCE {  
-    version                 INTEGER (1 ..  127),  
-    name                    LDAPDN,  
+  BindRequest ::= [APPLICATION 0] SEQUENCE { \
+    version                 INTEGER (1 ..  127), \
+    name                    LDAPDN, \
     authentication          AuthenticationChoice }
 
 # Simple Authentication Method with OTP
@@ -75,15 +75,15 @@ server a password and a one-time password (OTP).
 
 The Authentication scope is defined as:
 
-  AuthenticationChoice ::= CHOICE {  
-    simple                  [0] OCTET STRING,  
-                            -- 1 and 2 reserved  
-    sasl                    [3] SaslCredentials,  
-    simpleotp               [4] SimpleOtp,  
+  AuthenticationChoice ::= CHOICE { \
+    simple                  [0] OCTET STRING, \
+                            -- 1 and 2 reserved \
+    sasl                    [3] SaslCredentials, \
+    simpleotp               [4] SimpleOtp, \
     ... }
 
-  SimpleOtp ::= SEQUENCE {  
-    password                OCTET STRING,  
+  SimpleOtp ::= SEQUENCE { \
+    password                OCTET STRING, \
     onetimepassword         OCTET STRING }
 
 Text based passwords and one-time password transferred to the server using the 'simpleotp' 'AuthenticationChoice' SHALL
