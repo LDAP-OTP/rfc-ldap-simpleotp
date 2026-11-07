@@ -49,7 +49,7 @@ credentials in the form of name, password, and a one-time password (OTP).
 
 # Introduction {#intro}
 
-The Lightweight Directory Access Protocol (LDAP) [RFC 4510](RFC4510) is a
+The Lightweight Directory Access Protocol (LDAP) [](RFC4510) is a
 protocol for accessing directories. It offers searching, fetching,
 and manipulating directory content and ways to access a set of
 security functions.
@@ -58,7 +58,7 @@ The LDAP also offers to Login, or in LDAP terminology 'Bind operation', to
 a given set of credentials.
 
 These credentials are represented by the 'AuthenticationChoice' defined in
-[RFC 4511](RFC4511).
+[](RFC4511).
 
 # LDAP Bind operation
 
@@ -80,7 +80,7 @@ The Authentication scope is defined as:
 
 > AuthenticationChoice ::= CHOICE {
 >   simple                  [0] OCTET STRING,
->                           -- 1 and 2 reserved
+>                           /* 1 and 2 are reserved */
 >   sasl                    [3] SaslCredentials,
 >   simpleotp               [4] SimpleOtp,
 >   ... }
@@ -90,7 +90,7 @@ The Authentication scope is defined as:
 >   onetimepassword         OCTET STRING }
 
 Text based passwords and one-time password transferred to the server using the 'simpleotp' 'AuthenticationChoice' SHALL
-be transferred as UTF-8 [RFC 3629](RFC3629) encoded Unicode.
+be transferred as UTF-8 [](RFC3629) encoded Unicode.
 
 # Conventions and Definitions
 
