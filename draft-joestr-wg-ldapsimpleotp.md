@@ -3,7 +3,7 @@ title: "Lightweight Directory Access Protocol: Simple Authentication with OTP"
 abbrev: "LDAP: Simple OTP"
 category: info
 
-docname: draft-joestr-ldapotpwg-ldapsimpleotp-latest
+docname: draft-joestr-wg-ldapsimpleotp-latest
 submissiontype: independent  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -22,7 +22,7 @@ venue:
 #  mail: mb.ldap-otp@joestr.priv.at
 #  arch: https://github.com/LDAP-OTP
   github: "LDAP-OTP/rfc-ldap-simpleotp"
-  latest: "https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-ldapotpwg-ldapsimpleotp.html"
+  latest: "https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-wg-ldapsimpleotp.html"
 
 author:
  -
