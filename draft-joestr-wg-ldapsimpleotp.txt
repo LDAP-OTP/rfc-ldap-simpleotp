@@ -4,12 +4,12 @@
 
 Network Working Group                                        J. Strasser
 Internet-Draft                                                       n/a
-Intended status: Informational                           6 November 2026
-Expires: 10 May 2027
+Intended status: Informational                           7 November 2026
+Expires: 11 May 2027
 
 
  Lightweight Directory Access Protocol: Simple Authentication with OTP
-              draft-joestr-ldapotpwg-ldapsimpleotp-latest
+                  draft-joestr-wg-ldapsimpleotp-latest
 
 Abstract
 
@@ -23,10 +23,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://LDAP-
-   OTP.github.io/rfc-ldap-simpleotp/draft-joestr-ldapotpwg-
-   ldapsimpleotp.html.  Status information for this document may be
-   found at https://datatracker.ietf.org/doc/draft-joestr-ldapotpwg-
-   ldapsimpleotp/.
+   OTP.github.io/rfc-ldap-simpleotp/draft-joestr-wg-ldapsimpleotp.html.
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-joestr-wg-ldapsimpleotp/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/LDAP-OTP/rfc-ldap-simpleotp.
@@ -46,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 May 2027.
+   This Internet-Draft will expire on 11 May 2027.
 
 Copyright Notice
 
@@ -73,17 +72,16 @@ Table of Contents
 
 1.  Introduction
 
-   The Lightweight Directory Access Protocol (LDAP) RFC4510
-   (https://www.rfc-editor.org/info/rfc4510/) is a protocol for
-   accessing directories.  It offers searching, fetching, and
-   manipulating directory content and ways to access a set of security
-   functions.
+   The Lightweight Directory Access Protocol (LDAP) RFC4510 is a
+   protocol for accessing directories.  It offers searching, fetching,
+   and manipulating directory content and ways to access a set of
+   security functions.
 
    The LDAP also offers to Login, or in LDAP terminology 'Bind
    operation', to a given set of credentials.
 
    These credentials are represented by the 'AuthenticationChoice'
-   defined in RFC 4511 (https://www.rfc-editor.org/info/rfc4511).
+   defined in RFC4511.
 
 2.  LDAP Bind operation
 
@@ -93,8 +91,8 @@ Table of Contents
 
    The 'Bind request' is defined as follows:
 
-   BindRequest ::= [APPLICATION 0] SEQUENCE { \ version INTEGER (1 ..
-   127), \ name LDAPDN, \ authentication AuthenticationChoice }
+      BindRequest ::= [APPLICATION 0] SEQUENCE { version INTEGER (1 ..
+      127), name LDAPDN, authentication AuthenticationChoice }
 
 3.  Simple Authentication Method with OTP
 
@@ -104,17 +102,16 @@ Table of Contents
 
    The Authentication scope is defined as:
 
-   AuthenticationChoice ::= CHOICE { \ simple [0] OCTET STRING, \ -- 1
-   and 2 reserved \ sasl [3] SaslCredentials, \ simpleotp [4] SimpleOtp,
-   \ ... }
+      AuthenticationChoice ::= CHOICE { simple [0] OCTET STRING, /* 1
+      and 2 are reserved */ sasl [3] SaslCredentials, simpleotp [4]
+      SimpleOtp, ... }
 
-   SimpleOtp ::= SEQUENCE { \ password OCTET STRING, \ onetimepassword
-   OCTET STRING }
+      SimpleOtp ::= SEQUENCE { password OCTET STRING, onetimepassword
+      OCTET STRING }
 
    Text based passwords and one-time password transferred to the server
    using the 'simpleotp' 'AuthenticationChoice' SHALL be transferred as
-   UTF-8 RFC3629 (https://www.rfc-editor.org/info/rfc3629/) encoded
-   Unicode.
+   UTF-8 RFC3629 encoded Unicode.
 
 4.  Conventions and Definitions
 
@@ -149,6 +146,20 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
+              2003, <https://www.rfc-editor.org/rfc/rfc3629>.
+
+   [RFC4510]  Zeilenga, K., Ed., "Lightweight Directory Access Protocol
+              (LDAP): Technical Specification Road Map", RFC 4510,
+              DOI 10.17487/RFC4510, June 2006,
+              <https://www.rfc-editor.org/rfc/rfc4510>.
+
+   [RFC4511]  Sermersheim, J., Ed., "Lightweight Directory Access
+              Protocol (LDAP): The Protocol", RFC 4511,
+              DOI 10.17487/RFC4511, June 2006,
+              <https://www.rfc-editor.org/rfc/rfc4511>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
