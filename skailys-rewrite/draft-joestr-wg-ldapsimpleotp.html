@@ -6,6 +6,7 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>Lightweight Directory Access Protocol: Simple Authentication with OTP</title>
 <meta content="Joel Strasser" name="author">
+<meta content="Skai Robin Brammer" name="author">
 <meta content="
        This document describes an additional authentication choice for the
 Lightweight Directory Access Protocol (LDAP) which consists of
@@ -16,7 +17,7 @@ credentials in the form of name, password, and a one-time password (OTP).
 <meta content="Simple Authentication" name="keyword">
 <meta content="One-Time Password" name="keyword">
 <meta content="OTP" name="keyword">
-<meta content="draft-joestr-ldapotpwg-ldapsimpleotp-latest" name="ietf.draft">
+<meta content="draft-joestr-wg-ldapsimpleotp-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.35.0
     Python 3.14.10
@@ -32,7 +33,7 @@ credentials in the form of name, password, and a one-time password (OTP).
     requests 2.33.1
     wcwidth 0.9.4
 -->
-<link href="draft-joestr-ldapotpwg-ldapsimpleotp.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-joestr-wg-ldapsimpleotp.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1049,8 +1050,8 @@ svg {
 <td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Strasser</td>
-<td class="center">Expires 11 May 2027</td>
+<td class="left">Strasser &amp; Brammer</td>
+<td class="center">Expires 12 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1060,19 +1061,23 @@ svg {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-joestr-ldapotpwg-ldapsimpleotp-latest</dd>
+<dd class="internet-draft">draft-joestr-wg-ldapsimpleotp-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-11-07" class="published">7 November 2026</time>
+<time datetime="2026-11-08" class="published">8 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-05-11">11 May 2027</time></dd>
-<dt class="label-authors">Author:</dt>
+<dd class="expires"><time datetime="2027-05-12">12 May 2027</time></dd>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">J. Strasser</div>
+<div class="org">n/a</div>
+</div>
+<div class="author">
+      <div class="author-name">S. R. Brammer</div>
 <div class="org">n/a</div>
 </div>
 </dd>
@@ -1091,8 +1096,8 @@ credentials in the form of name, password, and a one-time password (OTP).<a href
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-ldapotpwg-ldapsimpleotp.html">https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-ldapotpwg-ldapsimpleotp.html</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-joestr-ldapotpwg-ldapsimpleotp/">https://datatracker.ietf.org/doc/draft-joestr-ldapotpwg-ldapsimpleotp/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        The latest revision of this draft can be found at <span><a href="https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-wg-ldapsimpleotp.html">https://LDAP-OTP.github.io/rfc-ldap-simpleotp/draft-joestr-wg-ldapsimpleotp.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-joestr-wg-ldapsimpleotp/">https://datatracker.ietf.org/doc/draft-joestr-wg-ldapsimpleotp/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">Source for this draft and an issue tracker can be found at
         <span><a href="https://github.com/LDAP-OTP/rfc-ldap-simpleotp">https://github.com/LDAP-OTP/rfc-ldap-simpleotp</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1115,7 +1120,7 @@ credentials in the form of name, password, and a one-time password (OTP).<a href
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1164,37 +1169,42 @@ credentials in the form of name, password, and a one-time password (OTP).<a href
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
                 <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.  <a href="#name-one-time-password-otp" class="internal xref">One-time password (OTP)</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
-                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="auto internal xref">2.5</a>.  <a href="#name-simple-authentication-metho" class="internal xref">Simple Authentication Method with OTP</a></p>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-extending-of-ldap-authentic" class="internal xref">Extending of LDAP AuthenticationChoices</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-otp-value-a-credential-valu" class="internal xref">OTP value: A credential value presented by the client to the server, whose validity is limited, by number of uses or by time, as determined by the OTP mechanism in use. Examples are values generated by HOTP (RFC 4226) or TOTP (RFC 6238). This document does not require either.</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-simple-authentication-metho" class="internal xref">Simple Authentication Method with OTP</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-classification" class="internal xref">Classification</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-extending-of-ldap-authentic" class="internal xref">Extending of LDAP AuthenticationChoices</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-server-behavior" class="internal xref">Server Behavior</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-classification" class="internal xref">Classification</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-server-behavior" class="internal xref">Server Behavior</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1205,14 +1215,26 @@ credentials in the form of name, password, and a one-time password (OTP).<a href
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Lightweight Directory Access Protocol (LDAP) <a href="https://www.rfc-editor.org/info/rfc4510/">RFC4510</a> is a
+<p id="section-1-1">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+The Lightweight Directory Access Protocol (LDAP) <a href="RFC4510">RFC 4510</a> is a
+=======
+The Lightweight Directory Access Protocol (<span>[<a href="#LDAP" class="cite xref">LDAP</a>]</span>) is a
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; f21be4f (fix: use correct reference syntax)
 protocol for accessing directories. It offers searching, fetching,
 and manipulating directory content and ways to access a set of
 security functions.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">The LDAP also offers to Login, or in LDAP terminology 'Bind operation', to
 a given set of credentials.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">These credentials are represented by the 'AuthenticationChoice' defined in
-<a href="https://www.rfc-editor.org/info/rfc4511">RFC 4511</a>.<a href="#section-1-3" class="pilcrow">¶</a></p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<a href="RFC4511">RFC 4511</a>.
+=======
+<span>[<a href="#RFC4511" class="cite xref">RFC4511</a>]</span>.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; f21be4f (fix: use correct reference syntax)
+=======
+<a href="https://www.rfc-editor.org/info/rfc4511">RFC 4511</a>.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 56749a8 (A small rewrite of the document.)<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">According to this RFC, the scope of authentication is extended by a one-time
 password to increase security by providing an additional authentication factor
 that may vary based on the number of logins or time.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1249,10 +1271,14 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-ldap-bind-request" class="section-name selfRef">LDAP Bind request</a>
         </h3>
 <p id="section-2.2-1">The 'Bind request' is defined as follows in <a href="https://www.rfc-editor.org/info/rfc4511/#section-4.2">(RFC 4511, Section 4.2)</a>:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">BindRequest ::= [APPLICATION 0] SEQUENCE { \
-    version                 INTEGER (1 ..  127), \
-    name                    LDAPDN, \
-    authentication          AuthenticationChoice }<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-2.2-2.1">
+            <p id="section-2.2-2.1.1">BindRequest ::= [APPLICATION 0] SEQUENCE {
+  version                 INTEGER (1 ..  127),
+  name                    LDAPDN,
+  authentication          AuthenticationChoice }<a href="#section-2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="ldap-authenticationchoice">
@@ -1260,14 +1286,15 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
         <h3 id="name-ldap-authenticationchoice">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-ldap-authenticationchoice" class="section-name selfRef">LDAP AuthenticationChoice</a>
         </h3>
-<p id="section-2.3-1">The AuthenticationChoice is extendable according to
+<p id="section-2.3-1">The 'AuthenticationChoice' is extendable according to
 <a href="https://www.rfc-editor.org/info/rfc4520/#section-3.7">(RFC 4520, Section 3.7)</a>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">Each authentication choice consists of an ASN.1 identifier in the form of a
-keyword and a non-negative integer tag. Additional the method <span class="bcp14">SHALL</span> be classified
+<p id="section-2.3-2">Each 'AuthenticationChoice' consists of an ASN.1 identifier in the form of a
+keyword and a non-negative integer tag. Additional the method shall be classified
 by the registrant
 <a href="https://www.rfc-editor.org/info/rfc4520/#section-3.7">(RFC 4520, Section 3.7)</a>.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.3-3">The Authentication scope are currently defined as:<a href="#section-2.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.3-4">AuthenticationChoice ::= CHOICE { \
+<p id="section-2.3-3">The scope of the 'AuthenticationChoices' are currently defined as:<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-4">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:draft-joestr-ldapotpwg-ldapsimpleotp.md
+  AuthenticationChoice ::= CHOICE { \
     simple                  [0] OCTET STRING, \
                             -- 1 and 2 reserved \
     sasl                    [3] SaslCredentials, \
@@ -1278,115 +1305,163 @@ by the registrant
 <section id="section-2.4">
         <h3 id="name-one-time-password-otp">
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-one-time-password-otp" class="section-name selfRef">One-time password (OTP)</a>
-        </h3>
-<p id="section-2.4-1">OTP value: A credential value presented by the client to the server, whose validity is limited, by number of uses or by time, as determined by the OTP mechanism in use. Examples are values generated by HOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 4226)</a> or TOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 6238)</a>. This document does not require either.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.4-2">OTP mechanism: The means by which OTP values are generated and verified. This document does not specify an OTP mechanism.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+      </h3>
 </section>
 </div>
+</section>
+</div>
+<div id="otp-value-a-credential-value-presented-by-the-client-to-the-server-whose-validity-is-limited-by-number-of-uses-or-by-time-as-determined-by-the-otp-mechanism-in-use-examples-are-values-generated-by-hotp-rfc-4226httpswwwrfc-editororginforfc4226-or-totp-rfc-6238httpswwwrfc-editororginforfc4226-this-document-does-not-require-either">
+<section id="section-3">
+      <h2 id="name-otp-value-a-credential-valu">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-otp-value-a-credential-valu" class="section-name selfRef">OTP value: A credential value presented by the client to the server, whose validity is limited, by number of uses or by time, as determined by the OTP mechanism in use. Examples are values generated by HOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 4226)</a> or TOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 6238)</a>. This document does not require either.</a>
+      </h2>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3-1.1">
+          <p id="section-3-1.1.1">AuthenticationChoice ::= CHOICE {
+  simple                  [0] OCTET STRING,
+                          -- 1 and 2 reserved
+  sasl                    [3] SaslCredentials,
+  simpleotp               [4] SimpleOtp,
+  ... }
+=======
+&gt;&gt;&gt;&gt;&gt;&gt; 56749a8 (A small rewrite of the document.)<a href="#section-3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-2">AuthenticationChoice ::= CHOICE { \
+    simple                  [0] OCTET STRING, \
+                            -- 1 and 2 reserved \
+    sasl                    [3] SaslCredentials, \
+    ... }<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Text based passwords and one-time password transferred to the server using the 'simpleotp' 'AuthenticationChoice' <span class="bcp14">SHALL</span>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+be transferred as UTF-8 <a href="RFC3629">RFC 3629</a> encoded Unicode.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; aa20e77 (feat: update normative references):draft-joestr-wg-ldapsimpleotp.md
+=======
+be transferred as <span>[<a href="#UTF-8" class="cite xref">UTF-8</a>]</span> encoded Unicode.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; f21be4f (fix: use correct reference syntax)<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">OTP mechanism: The means by which OTP values are generated and verified. This document does not specify an OTP mechanism.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <div id="simple-authentication-method-with-otp">
-<section id="section-2.5">
+<section id="section-3.1">
         <h3 id="name-simple-authentication-metho">
-<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-simple-authentication-metho" class="section-name selfRef">Simple Authentication Method with OTP</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-simple-authentication-metho" class="section-name selfRef">Simple Authentication Method with OTP</a>
         </h3>
-<p id="section-2.5-1">The 'Simple Authentication Method with OTP', or short 'Simple OTP', is a way to
-present the LDAP server a password and a OTP value.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
-<p id="section-2.5-2">The AuthenticationChoice is defined as:<a href="#section-2.5-2" class="pilcrow">¶</a></p>
-<p id="section-2.5-3">SimpleOTP ::= SEQUENCE { \
+<p id="section-3.1-1">The 'Simple Authentication Method with OTP', or short 'Simple OTP', is a way to
+present the LDAP server a password and a OTP value.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The 'Simple OTP' as an 'AuthenticationChoice' is defined as:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">SimpleOTP ::= SEQUENCE { \
     password         OCTET STRING, \
-    otpvalue         OCTET STRING }<a href="#section-2.5-3" class="pilcrow">¶</a></p>
-<p id="section-2.5-4">Text based passwords and OTP value transferred to the server using the
-'simpleotp' 'AuthenticationChoice' <span class="bcp14">SHALL</span> be transferred as UTF-8
-<a href="https://www.rfc-editor.org/info/rfc3629/">RFC3629</a> encoded Unicode.<a href="#section-2.5-4" class="pilcrow">¶</a></p>
+    otpvalue         OCTET STRING }<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Text based passwords and OTP value transferred to the server using the
+'simpleotp' 'AuthenticationChoice' <span class="bcp14">SHALL</span> be transferred as <span>[<a href="#UTF-8" class="cite xref">UTF-8</a>]</span>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 56749a8 (A small rewrite of the document.)
+<a href="https://www.rfc-editor.org/info/rfc3629/">RFC3629</a> encoded Unicode.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="extending-of-ldap-authenticationchoices">
-<section id="section-3">
+<section id="section-4">
       <h2 id="name-extending-of-ldap-authentic">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-extending-of-ldap-authentic" class="section-name selfRef">Extending of LDAP AuthenticationChoices</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-extending-of-ldap-authentic" class="section-name selfRef">Extending of LDAP AuthenticationChoices</a>
       </h2>
-<p id="section-3-1">This document extends the AuthenticationChoice with a new alternative, SimpleOTP, identified by the context-specific tag [4].<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">AuthenticationChoice ::= CHOICE { \
+<p id="section-4-1">This document extends the AuthenticationChoice with a new alternative, SimpleOTP, identified by the context-specific tag [4].<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">AuthenticationChoice ::= CHOICE { \
     simple                  [0] OCTET STRING, \
                             -- 1 and 2 reserved \
     sasl                    [3] SaslCredentials, \
     simpleotp               [4] SimpleOTP
-    ... }<a href="#section-3-2" class="pilcrow">¶</a></p>
+    ... }<a href="#section-4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="classification">
-<section id="section-4">
+<section id="section-5">
       <h2 id="name-classification">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-classification" class="section-name selfRef">Classification</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-classification" class="section-name selfRef">Classification</a>
       </h2>
-<p id="section-4-1">This document classifies Simple OTP as LIMITED USE, because it is experimental and new. A future document <span class="bcp14">MAY</span> reclassify it as COMMON.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">This document classifies Simple OTP as LIMITED USE, the same usage
+that is assigned to the simple method in the IANA registry of LDAP
+authentication methods [IANA-LDAP].  This classification reflects
+[reason].<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">--- https://www.iana.org/assignments/ldap-parameters#ldap-parameters-7<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="server-behavior">
-<section id="section-5">
+<section id="section-6">
       <h2 id="name-server-behavior">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-server-behavior" class="section-name selfRef">Server Behavior</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-server-behavior" class="section-name selfRef">Server Behavior</a>
       </h2>
-<p id="section-5-1">A server that implements this document but does not support Simple OTP for a given Bind request <span class="bcp14">MUST</span> return a BindResponse with the resultCode authMethodNotSupported <a href="https://www.rfc-editor.org/info/rfc4511/#section-4.2">(RFC 4511, Section 4.2)</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">A client that receives authMethodNotSupported in response to a Bind request using the SimpleOTP AuthencticationChoice <span class="bcp14">MUST NOT</span> fall back to the simple alternative unless it is explicitly configured to do so.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-6-1">A server that implements this document but does not support Simple OTP for a given Bind request <span class="bcp14">MUST</span> return a BindResponse with the resultCode 'authMethodNotSupported' <a href="https://www.rfc-editor.org/info/rfc4511/#section-4.2">(RFC 4511, Section 4.2)</a>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">A client that receives authMethodNotSupported in response to a Bind request using the SimpleOTP AuthencticationChoice <span class="bcp14">MUST NOT</span> fall back to the simple alternative unless it is explicitly configured to do so.<a href="#section-6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="implementation-considerations">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-implementation-consideratio">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
       </h2>
-<p id="section-6-1">The one-time password is opaque to the protocol defined in this document. A server could, for
-example, verify it using HOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 4226)</a> or TOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 6238)</a>. This document does not require either.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The one-time password is opaque to the protocol defined in this document. A server could, for
+example, verify it using HOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 4226)</a> or TOTP <a href="https://www.rfc-editor.org/info/rfc4226">(RFC 6238)</a>. This document does not require either.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-7-1">IANA <span class="bcp14">SHOULD</span> assign a new 'Bind authentication' method with following properties:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">IANA <span class="bcp14">SHOULD</span> assign a new 'Bind authentication' method with following properties:<a href="#section-8-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-7-2.1">
-          <p id="section-7-2.1.1">Method: simpleotp<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-8-2.1">
+          <p id="section-8-2.1.1">Method: simpleotp<a href="#section-8-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-2.2">
-          <p id="section-7-2.2.1">Value: 4<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-8-2.2">
+          <p id="section-8-2.2.1">Value: 4<a href="#section-8-2.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-2.3">
-          <p id="section-7-2.3.1">Owner: IESG<a href="#section-7-2.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-8-2.3">
+          <p id="section-8-2.3.1">Owner: IESG<a href="#section-8-2.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-2.4">
-          <p id="section-7-2.4.1">Usage: LIMITED USE<a href="#section-7-2.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-8-2.4">
+          <p id="section-8-2.4.1">Usage: LIMITED USE<a href="#section-8-2.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-2.5">
-          <p id="section-7-2.5.1">Reference: This RFC<a href="#section-7-2.5.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-8-2.5">
+          <p id="section-8-2.5.1">Reference: This RFC<a href="#section-8-2.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
 </div>
 <div id="security">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-security-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-8-1">TODO Security<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">TODO Security<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-normative-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
+<dt id="LDAP">[LDAP]</dt>
+      <dd>
+<span class="refAuthor">Zeilenga, K., Ed.</span>, <span class="refTitle">"Lightweight Directory Access Protocol (LDAP): Technical Specification Road Map"</span>, <span class="seriesInfo">RFC 4510</span>, <span class="seriesInfo">DOI 10.17487/RFC4510</span>, <time datetime="2006-06" class="refDate">June 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4510">https://www.rfc-editor.org/rfc/rfc4510</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC4511">[RFC4511]</dt>
+      <dd>
+<span class="refAuthor">Sermersheim, J., Ed.</span>, <span class="refTitle">"Lightweight Directory Access Protocol (LDAP): The Protocol"</span>, <span class="seriesInfo">RFC 4511</span>, <span class="seriesInfo">DOI 10.17487/RFC4511</span>, <time datetime="2006-06" class="refDate">June 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4511">https://www.rfc-editor.org/rfc/rfc4511</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
+      <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="UTF-8">[UTF-8]</dt>
+    <dd>
+<span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3629">https://www.rfc-editor.org/rfc/rfc3629</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1401,8 +1476,8 @@ example, verify it using HOTP <a href="https://www.rfc-editor.org/info/rfc4226">
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Joel Strasser</span></div>
@@ -1410,6 +1485,14 @@ example, verify it using HOTP <a href="https://www.rfc-editor.org/info/rfc4226">
 <div class="email">
 <span>Email:</span>
 <a href="mailto:strasser999@gmail.com" class="email">strasser999@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Skai Robin Brammer</span></div>
+<div dir="auto" class="left"><span class="org">n/a</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:skai@skailys.dev" class="email">skai@skailys.dev</a>
 </div>
 </address>
 </section>
