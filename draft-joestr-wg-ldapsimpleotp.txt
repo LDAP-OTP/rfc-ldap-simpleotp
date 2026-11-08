@@ -3,9 +3,9 @@
 
 
 Network Working Group                                        J. Strasser
-Internet-Draft                                                       n/a
-Intended status: Informational                           7 November 2026
-Expires: 11 May 2027
+Internet-Draft                                             S. R. Brammer
+Intended status: Informational                                       n/a
+Expires: 12 May 2027                                     8 November 2026
 
 
  Lightweight Directory Access Protocol: Simple Authentication with OTP
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 May 2027.
+   This Internet-Draft will expire on 12 May 2027.
 
 Copyright Notice
 
@@ -61,21 +61,29 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  LDAP Bind operation
-   3.  Simple Authentication Method with OTP
-   4.  Conventions and Definitions
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  Normative References
+     1.1.  Scope
+   2.  Conventions and Definitions
+     2.1.  Keywords to Indicate Requirements Levels
+     2.2.  LDAP Bind request
+     2.3.  LDAP AuthenticationChoice
+     2.4.  One-time password (OTP)
+     2.5.  Simple Authentication Method with OTP
+   3.  Extending of LDAP AuthenticationChoices
+   4.  Classification
+   5.  Server Behavior
+   6.  Implementation Considerations
+   7.  IANA Considerations
+   8.  Security Considerations
+   9.  Normative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
-   The Lightweight Directory Access Protocol ([LDAP]) is a protocol for
-   accessing directories.  It offers searching, fetching, and
-   manipulating directory content and ways to access a set of security
-   functions.
+   The Lightweight Directory Access Protocol (LDAP) RFC 4510 (RFC4510)
+   is a protocol for accessing directories.  It offers searching,
+   fetching, and manipulating directory content and ways to access a set
+   of security functions.
 
    The LDAP also offers to Login, or in LDAP terminology 'Bind
    operation', to a given set of credentials.
@@ -83,37 +91,23 @@ Table of Contents
    These credentials are represented by the 'AuthenticationChoice'
    defined in [RFC4511].
 
-2.  LDAP Bind operation
+   According to this RFC, the scope of authentication is extended by a
+   one-time password to increase security by providing an additional
+   authentication factor that may vary based on the number of logins or
+   time.
 
-   The 'Bind operation' (RFC 4511, Section 4.2) (https://www.rfc-
-   editor.org/info/rfc4511/#section-4.2) defines the authentication
-   choice freely.
+1.1.  Scope
 
-   The 'Bind request' is defined as follows:
+   This document defines the simpleotp alternative of the LDAP
+   AuthenticationChoice and how it is used in a Bind operation.
 
-      BindRequest ::= [APPLICATION 0] SEQUENCE { version INTEGER (1 ..
-      127), name LDAPDN, authentication AuthenticationChoice }
+   This document does not constrain how an OTP value is generated or
+   verified, and it does not specify how OTP mechanisms are provisioned
+   or how shared secrets are distributed.
 
-3.  Simple Authentication Method with OTP
+2.  Conventions and Definitions
 
-   The 'Simple Authentication Method with OTP', or short 'Simple OTP',
-   is a way to present the LDAP server a password and a one-time
-   password (OTP).
-
-   The Authentication scope is defined as:
-
-      AuthenticationChoice ::= CHOICE { simple [0] OCTET STRING, /* 1
-      and 2 are reserved */ sasl [3] SaslCredentials, simpleotp [4]
-      SimpleOtp, ... }
-
-      SimpleOtp ::= SEQUENCE { password OCTET STRING, onetimepassword
-      OCTET STRING }
-
-   Text based passwords and one-time password transferred to the server
-   using the 'simpleotp' 'AuthenticationChoice' SHALL be transferred as
-   [UTF-8] encoded Unicode.
-
-4.  Conventions and Definitions
+2.1.  Keywords to Indicate Requirements Levels
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -121,11 +115,102 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-5.  Security Considerations
+2.2.  LDAP Bind request
 
-   TODO Security
+   The 'Bind request' is defined as follows in (RFC 4511, Section 4.2)
+   (https://www.rfc-editor.org/info/rfc4511/#section-4.2):
 
-6.  IANA Considerations
+      BindRequest ::= [APPLICATION 0] SEQUENCE { version INTEGER (1 ..
+      127), name LDAPDN, authentication AuthenticationChoice }
+
+2.3.  LDAP AuthenticationChoice
+
+   The 'AuthenticationChoice' is extendable according to (RFC 4520,
+   Section 3.7) (https://www.rfc-editor.org/info/rfc4520/#section-3.7).
+
+   Each 'AuthenticationChoice' consists of an ASN.1 identifier in the
+   form of a keyword and a non-negative integer tag.  Additional the
+   method shall be classified by the registrant (RFC 4520, Section 3.7)
+   (https://www.rfc-editor.org/info/rfc4520/#section-3.7).
+
+   The scope of the 'AuthenticationChoices' are currently defined as:
+
+   AuthenticationChoice ::= CHOICE { \ simple [0] OCTET STRING, \ -- 1
+   and 2 reserved \ sasl [3] SaslCredentials, \ ... }
+
+2.4.  One-time password (OTP)
+
+   OTP value: A credential value presented by the client to the server,
+   whose validity is limited, by number of uses or by time, as
+   determined by the OTP mechanism in use.  Examples are values
+   generated by HOTP (RFC 4226) (https://www.rfc-editor.org/info/
+   rfc4226) or TOTP (RFC 6238) (https://www.rfc-editor.org/info/
+   rfc4226).  This document does not require either.
+
+   AuthenticationChoice ::= CHOICE { \ simple [0] OCTET STRING, \ -- 1
+   and 2 reserved \ sasl [3] SaslCredentials, \ ... }
+
+   Text based passwords and one-time password transferred to the server
+   using the 'simpleotp' 'AuthenticationChoice' SHALL be transferred as
+   [UTF-8] encoded Unicode.
+
+   OTP mechanism: The means by which OTP values are generated and
+   verified.  This document does not specify an OTP mechanism.
+
+2.5.  Simple Authentication Method with OTP
+
+   The 'Simple Authentication Method with OTP', or short 'Simple OTP',
+   is a way to present the LDAP server a password and a OTP value.
+
+   The 'Simple OTP' as an 'AuthenticationChoice' is defined as:
+
+   SimpleOTP ::= SEQUENCE { \ password OCTET STRING, \ otpvalue OCTET
+   STRING }
+
+   Text based passwords and OTP value transferred to the server using
+   the 'simpleotp' 'AuthenticationChoice' SHALL be transferred as
+   [UTF-8] encoded Unicode.
+
+3.  Extending of LDAP AuthenticationChoices
+
+   This document extends the AuthenticationChoice with a new
+   alternative, SimpleOTP, identified by the context-specific tag [4].
+
+   AuthenticationChoice ::= CHOICE { \ simple [0] OCTET STRING, \ -- 1
+   and 2 reserved \ sasl [3] SaslCredentials, \ simpleotp [4] SimpleOTP
+   ... }
+
+4.  Classification
+
+   This document classifies Simple OTP as LIMITED USE, the same usage
+   that is assigned to the simple method in the IANA registry of LDAP
+   authentication methods [IANA-LDAP].  This classification reflects
+   [reason].
+
+   --- https://www.iana.org/assignments/ldap-parameters#ldap-
+   parameters-7
+
+5.  Server Behavior
+
+   A server that implements this document but does not support Simple
+   OTP for a given Bind request MUST return a BindResponse with the
+   resultCode 'authMethodNotSupported' (RFC 4511, Section 4.2)
+   (https://www.rfc-editor.org/info/rfc4511/#section-4.2).
+
+   A client that receives authMethodNotSupported in response to a Bind
+   request using the SimpleOTP AuthencticationChoice MUST NOT fall back
+   to the simple alternative unless it is explicitly configured to do
+   so.
+
+6.  Implementation Considerations
+
+   The one-time password is opaque to the protocol defined in this
+   document.  A server could, for example, verify it using HOTP (RFC
+   4226) (https://www.rfc-editor.org/info/rfc4226) or TOTP (RFC 6238)
+   (https://www.rfc-editor.org/info/rfc4226).  This document does not
+   require either.
+
+7.  IANA Considerations
 
    IANA SHOULD assign a new 'Bind authentication' method with following
    properties:
@@ -140,7 +225,11 @@ Table of Contents
 
    *  Reference: This RFC
 
-7.  Normative References
+8.  Security Considerations
+
+   TODO Security
+
+9.  Normative References
 
    [LDAP]     Zeilenga, K., Ed., "Lightweight Directory Access Protocol
               (LDAP): Technical Specification Road Map", RFC 4510,
@@ -169,8 +258,13 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Joel Strasser
    n/a
    Email: strasser999@gmail.com
+
+
+   Skai Robin Brammer
+   n/a
+   Email: skai@skailys.dev
