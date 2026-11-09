@@ -44,7 +44,6 @@ normative:
   TOTP: RFC6238
 
 informative:
-  IANA-LDAP: https://www.iana.org/assignments/ldap-parameters#ldap-parameters-7
 
 ...
 
@@ -151,8 +150,8 @@ This document extends the AuthenticationChoice with a new alternative, SimpleOTP
 
 This document classifies Simple OTP as LIMITED USE, the same usage
 that is assigned to the simple method in the IANA registry of LDAP
-authentication methods {{IANA-LDAP}}. This classification reflects
-[reason].
+authentication methods [here]( https://www.iana.org/assignments/ldap-parameters#ldap-parameters-7).
+This classification reflects [reason].
 
 # Server Behavior
 
@@ -167,7 +166,7 @@ example, verify it using {{HOTP}} or {{TOTP}}. This document does not require ei
 
 # IANA Considerations {#iana}
 
-IANA SHOULD assign a new 'Bind authentication' method with following properties:
+IANA SHOULD assign a new LDAP Bind authentication method with following properties:
 
 * Method: simpleotp
 * Value: 4
