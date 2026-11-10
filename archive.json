@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-08T05:23:24.989130+00:00",
+  "timestamp": "2026-11-10T06:44:34.803069+00:00",
   "repo": "LDAP-OTP/rfc-ldap-simpleotp",
   "labels": [
     {
@@ -55,5 +55,34 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOVk8apM8AAAABNrHMew",
+      "title": "Rewritten version",
+      "url": "https://github.com/LDAP-OTP/rfc-ldap-simpleotp/pull/1",
+      "state": "MERGED",
+      "author": "joestr",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Add a definition section for LDAP AuthenticationChoice and one-time passwords.\n- Move the definition of the new method.\n- Changed 'onetimePassword' to 'otpValue' to avoid confusion.\nAdd an extension section.\n- Rewrite the classification with the reason that, if the classification is final, it should be decided on one value.\nDescribe server behaviour and implementation considerations.",
+      "createdAt": "2026-11-08T15:31:42Z",
+      "updatedAt": "2026-11-08T15:33:17Z",
+      "baseRepository": "LDAP-OTP/rfc-ldap-simpleotp",
+      "baseRefName": "main",
+      "baseRefOid": "f21be4f1f300ac329a1932d42d3a988f49908ce9",
+      "headRepository": "LDAP-OTP/rfc-ldap-simpleotp",
+      "headRefName": "skailys-rewrite2",
+      "headRefOid": "8a0293cf2431fdcf1da3093153abc6c9126fc864",
+      "closedAt": "2026-11-08T15:33:14Z",
+      "mergedAt": "2026-11-08T15:33:14Z",
+      "mergedBy": "joestr",
+      "mergeCommit": {
+        "oid": "93a94de92c72118b74443ae6786ddf7bcd6e7ff6"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
