@@ -1369,7 +1369,41 @@ server must be secure to prevent leackage of credentials.<a href="#section-4-1" 
       <h2 id="name-server-behavior">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-server-behavior" class="section-name selfRef">Server Behavior</a>
       </h2>
-<p id="section-5-1">A server that implements this document but does not support Simple OTP for a given Bind request <span class="bcp14">MUST</span> return a BindResponse with the resultCode 'authMethodNotSupported' <a href="https://www.rfc-editor.org/info/rfc4511/#section-4.2">(RFC 4511, Section 4.2)</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">A server that implements this document <span class="bcp14">MUST</span> process a LDAP Bind request
+with the Simple OTP alternative as follows:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5-2">
+<li id="section-5-2.1">
+          <p id="section-5-2.1.1">If Simple OTP is not enabled on the server, the server <span class="bcp14">MUST</span>
+return a BindResponse with the resultCode authMethodNotSupported
+(<span><a href="https://rfc-editor.org/rfc/rfc4511#section-4.2" class="relref">Section 4.2</a> of [<a href="#RFC4511" class="cite xref">RFC4511</a>]</span>).<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-5-2.2">
+          <p id="section-5-2.2.1">If the connection is not a protected connection, the server <span class="bcp14">MUST</span>
+reject the request with the resultCode confidentialityRequired
+and <span class="bcp14">MUST NOT</span> perform OTP verification.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-5-2.3">
+          <p id="section-5-2.3.1">Otherwise, the server performs OTP verification for the entry
+named in the request.  OTP verification <span class="bcp14">MUST</span> fail for an OTP
+value that the server has accepted before.<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-5-2.4">
+          <p id="section-5-2.4.1">If OTP verification could not be performed, the server <span class="bcp14">MUST NOT</span>
+return success.  It returns the resultCode [to be decided].<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-5-2.5">
+          <p id="section-5-2.5.1">If OTP verification fails for any reason, including an invalid,
+expired, or previously accepted OTP value, or because the named
+entry does not exist or is not configured for Simple OTP, the
+server <span class="bcp14">MUST</span> return the resultCode invalidCredentials.<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-5-2.6">
+          <p id="section-5-2.6.1">If OTP verification succeeds, the server returns the resultCode
+success.  The server <span class="bcp14">MUST</span> record the OTP value as accepted before
+it returns success, so that two concurrent Bind requests with the
+same OTP value cannot both succeed.<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
 </section>
 </div>
 <div id="client-behavior">
@@ -1377,7 +1411,28 @@ server must be secure to prevent leackage of credentials.<a href="#section-4-1" 
       <h2 id="name-client-behavior">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-client-behavior" class="section-name selfRef">Client Behavior</a>
       </h2>
-<p id="section-6-1">A client that receives 'authMethodNotSupported' <a href="https://www.rfc-editor.org/info/rfc4511/#section-4.2">(RFC 4511, Section 4.2)</a> in response to a Bind request using the Simple OTP 'AuthencticationChoice' <span class="bcp14">MUST NOT</span> fall back to the simple alternative unless it is explicitly configured to do so.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">A client that implements this document <span class="bcp14">MUST</span> observe the following
+rules when it sends a LDAP Bind request with the Simple OTP alternative:<a href="#section-6-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6-2">
+<li id="section-6-2.1">
+          <p id="section-6-2.1.1">The client <span class="bcp14">MUST</span> send the request only over a protected
+connection.  Before it sends the OTP value, the client <span class="bcp14">MUST</span>
+verify the identity of the server as specified in [RFC4513].<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-6-2.2">
+          <p id="section-6-2.2.1">If the client does not receive the resultCode success, it <span class="bcp14">MUST NOT</span> automatically retry the Bind with another authentication
+method, in particular with the simple alternative, unless the
+client has been explicitly configured to do so.  This applies
+to every outcome other than success, including
+authMethodNotSupported (<span><a href="https://rfc-editor.org/rfc/rfc4511#section-4.2" class="relref">Section 4.2</a> of [<a href="#RFC4511" class="cite xref">RFC4511</a>]</span>),
+invalidCredentials, protocolError, and a closed connection.<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-6-2.3">
+          <p id="section-6-2.3.1">Explicit configuration means a choice made by the user or
+administrator of the client.  A client <span class="bcp14">MUST NOT</span> treat
+information received from a server as such configuration.<a href="#section-6-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
 </section>
 </div>
 <div id="implementation-considerations">
