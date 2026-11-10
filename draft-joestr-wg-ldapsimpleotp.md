@@ -154,13 +154,56 @@ server must be secure to prevent leackage of credentials.
 
 TODO: Naming more reasons or find a more general reason.
 
-# Server Behavior
+# Server Behavior {#server-behavior}
 
-A server that implements this document but does not support Simple OTP for a given Bind request MUST return a BindResponse with the resultCode 'authMethodNotSupported' [(RFC 4511, Section 4.2)](https://www.rfc-editor.org/info/rfc4511/#section-4.2).
+A server that implements this document MUST process a LDAP Bind request
+with the Simple OTP alternative as follows:
 
-# Client Behavior
+1.  If Simple OTP is not enabled on the server, the server MUST
+    return a BindResponse with the resultCode authMethodNotSupported
+    ({{Section 4.2 of RFC4511}}).
 
-A client that receives 'authMethodNotSupported' [(RFC 4511, Section 4.2)](https://www.rfc-editor.org/info/rfc4511/#section-4.2) in response to a Bind request using the Simple OTP 'AuthencticationChoice' MUST NOT fall back to the simple alternative unless it is explicitly configured to do so.
+2.  If the connection is not a protected connection, the server MUST
+    reject the request with the resultCode confidentialityRequired
+    and MUST NOT perform OTP verification.
+
+3.  Otherwise, the server performs OTP verification for the entry
+    named in the request.  OTP verification MUST fail for an OTP
+    value that the server has accepted before.
+
+4.  If OTP verification could not be performed, the server MUST NOT
+    return success.  It returns the resultCode [to be decided].
+
+5.  If OTP verification fails for any reason, including an invalid,
+    expired, or previously accepted OTP value, or because the named
+    entry does not exist or is not configured for Simple OTP, the
+    server MUST return the resultCode invalidCredentials.
+
+6.  If OTP verification succeeds, the server returns the resultCode
+    success.  The server MUST record the OTP value as accepted before
+    it returns success, so that two concurrent Bind requests with the
+    same OTP value cannot both succeed.
+
+# Client Behavior {#client-behavior}
+
+A client that implements this document MUST observe the following
+rules when it sends a LDAP Bind request with the Simple OTP alternative:
+
+1.  The client MUST send the request only over a protected
+    connection.  Before it sends the OTP value, the client MUST
+    verify the identity of the server as specified in [RFC4513].
+
+2.  If the client does not receive the resultCode success, it MUST
+    NOT automatically retry the Bind with another authentication
+    method, in particular with the simple alternative, unless the
+    client has been explicitly configured to do so.  This applies
+    to every outcome other than success, including
+    authMethodNotSupported ({{Section 4.2 of RFC4511}}),
+    invalidCredentials, protocolError, and a closed connection.
+
+3.  Explicit configuration means a choice made by the user or
+    administrator of the client.  A client MUST NOT treat
+    information received from a server as such configuration.
 
 # Implementation Considerations
 
