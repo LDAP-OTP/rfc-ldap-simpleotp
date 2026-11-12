@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-10T06:44:34.803069+00:00",
+  "timestamp": "2026-11-12T06:37:17.295597+00:00",
   "repo": "LDAP-OTP/rfc-ldap-simpleotp",
   "labels": [
     {
@@ -83,6 +83,52 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOVk8apM8AAAABON75lg",
+      "title": "Skailys rewrite3",
+      "url": "https://github.com/LDAP-OTP/rfc-ldap-simpleotp/pull/2",
+      "state": "MERGED",
+      "author": "Skailys",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "Skailys"
+      ],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "- fixed: wording\n- add: extension of server and client behavior",
+      "createdAt": "2026-11-10T21:20:05Z",
+      "updatedAt": "2026-11-11T08:53:36Z",
+      "baseRepository": "LDAP-OTP/rfc-ldap-simpleotp",
+      "baseRefName": "main",
+      "baseRefOid": "50458333cb2f4b572be43b3770d34b3598ddce4e",
+      "headRepository": "LDAP-OTP/rfc-ldap-simpleotp",
+      "headRefName": "skailys-rewrite3",
+      "headRefOid": "f04127ec5a13f3d6ddcd87eff93b2889269b263d",
+      "closedAt": "2026-11-11T08:53:33Z",
+      "mergedAt": "2026-11-11T08:53:33Z",
+      "mergedBy": "joestr",
+      "mergeCommit": {
+        "oid": "acf37575c7617eeac54a6edf8459b77958c680c1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOVk8apM8AAAABXQ3nBA",
+          "commit": {
+            "abbreviatedOid": "f04127e"
+          },
+          "author": "joestr",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "good!",
+          "createdAt": "2026-11-11T08:53:20Z",
+          "updatedAt": "2026-11-11T08:53:20Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
